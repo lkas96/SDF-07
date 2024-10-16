@@ -1,8 +1,9 @@
-# MAVEN TUT
+# MAVEN TUTORIAL, Commands and simple explanations
 
-## mvn compile
-    1. creates empty project with maven layout/directory style
-    2. port regular java projects to folder structure and rename packages whatever
+## Initial Compile (No source codes yet, just want maven folder structure)
+    mvn compile
+>Creates empty project with maven layout/directory style
+>Port regular java projects to folder structure and rename packages whatever
 
 
 
@@ -11,23 +12,23 @@
     mvn compile exec:java -Dexec.mainClass="workshopd6.ServerApp" -Dexec.args="3000 C:\Users\Lawson\OneDrive\Desktop\SDF-workshop6-cookiemonster-main\cookie_file.txt"
 
 -Dexec.mainClass="workshopd6.ServerApp"
-> Point this to the main/entry point
+>Point this to the main/entry point
 
 -Dexec.args="3000 C:\Users\Lawson\OneDrive\Desktop\SDF-workshop6-cookiemonster-main\cookie_file.txt"
 >ServerApp takes in two arguments in the main method (port filetxt)
 
+## Creating a package (Compile classes into target directory, creates a JAR file as well)
+    mvn package
+>Creates a jar in the target directory
+>This jar package contains clientapp and serverapp
+>Can contain multiple entry points(main)
+>So when running the jar file, specify the entry point
 
 
-## mvn package
-    1. creates a jar in the target directory
-    2. this jar package contains clientapp and serverapp
-    3. can contain multiple entry points(main)
-    4. so when running the jar file, specify the entry point
-
-
-
-## run the jar package to launch client app
-    java -cp ./target/workshopd6-1.0-SNAPSHOT.jar workshopd6.ClientApp localhost:3000
-
-## run the jar package to launch server app
+## Run the jar package to launch ServerApp
     java -cp ./target/workshopd6-1.0-SNAPSHOT.jar workshopd6.ServerApp 3000 "C:\Users\Lawson\OneDrive\Desktop\SDF-workshop6-cookiemonster-main\cookie_file.txt"
+>Specify entry point, pass in the 2 arguments PORT textFile
+
+## Run the jar package to launch ClientApp
+    java -cp ./target/workshopd6-1.0-SNAPSHOT.jar workshopd6.ClientApp localhost:3000
+>Specify entry point, pass in argument HOST:PORT
