@@ -39,3 +39,55 @@
 ## Run the jar package to launch ClientApp
     java -cp ./target/workshopd6-1.0-SNAPSHOT.jar workshopd6.ClientApp localhost:3000
 >Specify entry point, pass in argument HOST:PORT
+
+<br  ><br  ><br  >
+
+## Shortcuts with POM.xml
+run server
+mvn exec:java -Dexec.mainClass="Server" -Dexec.args="8080 example.txt"
+  to run server class, passing arguments "8080" (port number) and "example.txt" (.txt file)
+
+run client
+mvn exec:java -Dexec.mainClass="Client" -Dexec.args="localhost 8080"
+  to run Client class, passing arguments "localhost" and "8080" (port number)
+
+### Snippet added to POM
+```
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+                <execution>
+                    <id>run-server</id>
+                    <goals>
+                        <goal>java</goal>
+                    </goals>
+                    <configuration>
+                        <mainClass>Server</mainClass>
+                        <arguments>
+                            <argument>${server.port}</argument>
+                            <argument>${server.file}</argument>
+                        </arguments>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>run-client</id>
+                    <goals>
+                        <goal>java</goal>
+                    </goals>
+                    <configuration>
+                        <mainClass>Client</mainClass>
+                        <arguments>
+                            <argument>${client.host}</argument>
+                            <argument>${client.port}</argument>
+                        </arguments>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```

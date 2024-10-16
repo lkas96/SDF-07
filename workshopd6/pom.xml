@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>workshopd6</groupId>
@@ -15,4 +16,51 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <id>run-server</id>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <mainClass>Server</mainClass>
+              <arguments>
+                <argument>${server.port}</argument>
+                <argument>${server.file}</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>run-client</id>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <mainClass>Client</mainClass>
+              <arguments>
+                <argument>${client.host}</argument>
+                <argument>${client.port}</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>
+
+<!-- 
+run server
+mvn exec:java -Dexec.mainClass="Server" -Dexec.args="8080 example.txt"
+  to run server class, passing arguments "8080" (port number) and "example.txt" (.txt file)
+run client
+mvn exec:java -Dexec.mainClass="Client" -Dexec.args="localhost 8080"
+  to run Client class, passing arguments "localhost" and "8080" (port number) -->
